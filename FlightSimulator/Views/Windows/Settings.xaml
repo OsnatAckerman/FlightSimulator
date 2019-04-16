@@ -25,8 +25,8 @@
         <TextBlock Grid.Row ="2" Padding="5" Margin="3">Flight Command Port:</TextBlock>
         <TextBox x:Name="CommandPort" Grid.Row ="2" Grid.Column="2" Padding="5" Margin="5" Text="{Binding FlightCommandPort}"/>
         <Button x:Name="OKbtn" Grid.Column="0" Grid.Row="3" HorizontalAlignment="right" VerticalAlignment="Bottom"
-                Content="OK" Padding="5" Margin="10,20,20,10" Width="50" Height="30" Command="{Binding ClickCommand}"/>
+                Content="OK" Padding="5" Margin="10,20,20,10" Width="60" Height="30" Command="{Binding ClickCommand}"/>
         <Button x:Name="Cancelbtn" Grid.Column="1" Grid.Row="3" HorizontalAlignment="left" VerticalAlignment="Bottom"
-                Content="Cancel" Padding="5" Margin="3" Width="50" Height="30" Command="{Binding CancelCommand}"/>
+                Content="Cancel" Padding="5" Margin="10,20,20,10" Width="60" Height="30" Command="{Binding CancelCommand}"/>
     </Grid>
 </Window>

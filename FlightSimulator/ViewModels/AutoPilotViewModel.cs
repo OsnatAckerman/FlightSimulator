@@ -1,43 +1,50 @@
-﻿using System;
+﻿using FlightSimulator.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace FlightSimulator.ViewModels
 {
     class AutoPilotViewModel : BaseNotify
     {
-        private string color = "White";
-        private bool isWrite = false;
-        private string content = "";
+        private String content = "";
 
-        public string BackgroundColor
+        public String BackgroundColor
         {
             get {
-                if (content != "")
-                {
-                    return "Pink";
-                } else
-                {
-                    return "White";
-                }
+                if (content != "") { return "Pink"; }
+                else { return "White"; }
             }
         }
 
-        public string Content
+        public String Content
         {
-            get
-            {
-                return content;
-            }
+            get { return content; }
 
             set
             {
                 content = value;
                 NotifyPropertyChanged("Content");
+                NotifyPropertyChanged("BackgroundColor");
             }
         }
 
+        private ICommand clearCommand;
+        public ICommand ClearCommand
+        {
+            get
+            {
+                return clearCommand ?? (clearCommand = new CommandHandler(() => OnClick()));
+            }
+        }
+        private void OnClick()
+        {
+            content = "";
+            NotifyPropertyChanged("Content");
+            NotifyPropertyChanged("BackgroundColor");
+        }
     }
 }

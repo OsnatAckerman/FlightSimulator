@@ -23,7 +23,7 @@ namespace FlightSimulator.ViewModels
             get;
         }
 
-        #region CommandSettings
+        #region SettingsCommand
         private ICommand _settingsCommand;
         public ICommand SettingsCommand
         {

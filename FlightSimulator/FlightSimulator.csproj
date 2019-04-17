@@ -105,8 +105,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Views\ManualAuto.xaml.cs">
-      <DependentUpon>ManualAuto.xaml</DependentUpon>
+    <Compile Include="Views\Manual.xaml.cs">
+      <DependentUpon>Manual.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ManualAauto.xaml.cs">
+      <DependentUpon>ManualAauto.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Windows\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
@@ -127,7 +130,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ManualAuto.xaml">
+    <Page Include="Views\Manual.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ManualAauto.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

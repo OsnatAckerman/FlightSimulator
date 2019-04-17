@@ -17,10 +17,11 @@
         </Grid.ColumnDefinitions>
 
         <TextBox Width="Auto" Background="{Binding BackgroundColor,UpdateSourceTrigger=PropertyChanged}"
-                 Text="{Binding Content, UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2"/>
+                 Text="{Binding Content, UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2" AcceptsReturn="True"/>
         <Button x:Name="OkbtnAuto" Grid.Column="0" Grid.Row="2" HorizontalAlignment="right" VerticalAlignment="Bottom"
-                Content="OK" Padding="5" Margin="10,20,20,10" Width="60" Height="30"/>
+                Content="OK" Padding="5" Margin="10,20,20,10" Width="60" Height="30" />
         <Button x:Name="ClearlbtnAuto" Grid.Column="1" Grid.Row="3" HorizontalAlignment="left" VerticalAlignment="Bottom"
-                Content="Clear" Padding="5" Margin="10,20,20,10" Width="60" Height="30" />
+                Content="Clear" Padding="5" Margin="10,20,20,10" Width="60" Height="30"
+                Command="{Binding ClearCommand}"/>
     </Grid>
 </UserControl>

@@ -37,14 +37,29 @@ namespace FlightSimulator.ViewModels
         {
             get
             {
-                return clearCommand ?? (clearCommand = new CommandHandler(() => OnClick()));
+                return clearCommand ?? (clearCommand = new CommandHandler(() => ClearClick()));
             }
         }
-        private void OnClick()
+        private void ClearClick()
         {
             content = "";
             NotifyPropertyChanged("Content");
             NotifyPropertyChanged("BackgroundColor");
         }
-    }
+
+
+        private ICommand okCommand;
+        public ICommand OkCommand
+        {
+            get
+            {
+                return okCommand ?? (okCommand = new CommandHandler(() => OKClick()));
+            }
+        }
+
+        private void OKClick()
+        {
+            CommandConnect.Instance.Send(content);
+        }
+}
 }

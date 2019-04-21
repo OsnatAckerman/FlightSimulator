@@ -19,7 +19,10 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="40"/>
         </Grid.ColumnDefinitions>
-        <local:Joystick Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center"/>
+        <local:Joystick x:Name="Joystick" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" 
+                        Aileron="{Binding AileronCommand, Mode=OneWayToSource}"
+                        Elevator="{Binding ElevatorCommand, Mode=OneWayToSource}" ></local:Joystick>
+      
         <TextBlock 
             Text="← throttle →" Grid.Row="1" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Left"   >
             <TextBlock.LayoutTransform>
@@ -31,11 +34,10 @@
 
         </TextBlock>
         <TextBlock 
-            Text="← aileron →" Grid.Column="2" Grid.Row="0" FontSize="15" VerticalAlignment="Top" HorizontalAlignment="Center"   >
-
+            Text="← aileron →" Grid.Column="2" Grid.Row="0" FontSize="15" VerticalAlignment="Top" HorizontalAlignment="Center"  >
         </TextBlock>
         <TextBlock 
-            Text="← elevator →" Grid.Row="1" Grid.Column="3" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center"   >
+            Text="← elevator →" Grid.Row="1" Grid.Column="3" FontSize="15" VerticalAlignment="Center" HorizontalAlignment="Center" >
             <TextBlock.LayoutTransform>
                 <RotateTransform Angle="+90"></RotateTransform>
             </TextBlock.LayoutTransform>
@@ -45,7 +47,7 @@
             Orientation="Horizontal"  
             Grid.Row="2"
             Grid.Column="2"
-             Value="0"
+             Value="{Binding RudderCommand}"
             Minimum="-1" 
             Maximum="1" 
             TickPlacement="BottomRight"
@@ -61,18 +63,27 @@
                 Grid.RowSpan="2"
             Minimum="0" 
             Maximum="1" 
-                Value="0.5"
+                Value="{Binding ThrottleCommand}"
             TickPlacement="TopLeft"
             TickFrequency="0.1"
             SmallChange="0.01" Height="332" LargeChange="0.1"
                 
             />
+        <TextBlock x:Name="AileronText" Text="{Binding ElementName=Joystick, Path=Aileron, StringFormat=0.00}" Grid.Column="2" Grid.Row="0" HorizontalAlignment="Right"  VerticalAlignment="Center" 
+                  />
+        <TextBlock x:Name="ElevatorText" Text="{Binding ElementName=Joystick, Path=Elevator, StringFormat=0.00}" Grid.Column="3" Grid.Row="1" HorizontalAlignment="Left"  VerticalAlignment="Top" 
+                  >
+            <TextBlock.LayoutTransform>
+                <RotateTransform Angle="+90"></RotateTransform>
+            </TextBlock.LayoutTransform>
+        </TextBlock>
+
         <TextBlock 
-            Text="{Binding ElementName=slider2,Path=Value}" Grid.Row="0" Grid.Column="1" FontSize="10" VerticalAlignment="Bottom" HorizontalAlignment="Center" >
+            Text="{Binding ElementName=slider2,Path=Value, StringFormat=0.00}" Grid.Row="0" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Left"  FontSize="10" FontWeight="DemiBold" Grid.ColumnSpan="1">
            
         </TextBlock>
         <TextBlock 
-            Text="{Binding ElementName=slider1,Path=Value}" Grid.Row="2" Grid.Column="1" FontSize="10" VerticalAlignment="Top" HorizontalAlignment="Right" >
+            Text="{Binding ElementName=slider1,Path=Value, StringFormat=0.00}" Grid.Row="2" Grid.Column="1" FontSize="10" VerticalAlignment="Top" HorizontalAlignment="Left" FontWeight="DemiBold">
 
         </TextBlock>
 

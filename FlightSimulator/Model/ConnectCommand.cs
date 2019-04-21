@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace FlightSimulator.Model
@@ -11,6 +12,7 @@ namespace FlightSimulator.Model
     class ConnectCommand
     {
         TcpClient client;
+        private Mutex mutex;
         private static ConnectCommand m_Instance = null;
         public static ConnectCommand Instance
         {
@@ -27,6 +29,7 @@ namespace FlightSimulator.Model
         private ConnectCommand()
         {
             isConnected = false;
+            mutex = new Mutex();
         }
 
 
@@ -56,7 +59,25 @@ namespace FlightSimulator.Model
 
         public void Send(string message)
         {
+            string[] commands = ParseMessage(message);
+            mutex.WaitOne();
+            Thread thread = new Thread(() => RunSend(commands, client));
+            thread.Start();
+            mutex.ReleaseMutex();
 
+        }
+
+        private void RunSend(string[] commands, TcpClient client)
+        {
+            if (!isConnected) return;
+            NetworkStream stream = client.GetStream();
+
+            foreach (string command in commands)
+            {
+                Byte[] data = System.Text.Encoding.ASCII.GetBytes(command+"\r\n");
+                stream.Write(data, 0, data.Length);
+                System.Threading.Thread.Sleep(2000);
+            }
         }
 
         private string[] ParseMessage(string message)

@@ -16,7 +16,7 @@ namespace FlightSimulator.Model
         TcpClient _client;
         TcpListener _listener;
         double lon, lat;
-
+    
 
         public bool shouldStop
         {

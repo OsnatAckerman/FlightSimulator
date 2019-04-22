@@ -9,24 +9,24 @@ using System.Threading.Tasks;
 
 namespace FlightSimulator.Model
 {
-    class ConnectCommand
+    class CommandConnect
     {
         TcpClient client;
         private Mutex mutex;
-        private static ConnectCommand m_Instance = null;
-        public static ConnectCommand Instance
+        private static CommandConnect m_Instance = null;
+        public static CommandConnect Instance
         {
             get
             {
                 if (m_Instance == null)
                 {
-                    m_Instance = new ConnectCommand();
+                    m_Instance = new CommandConnect();
                 }
                 return m_Instance;
             }
         }
 
-        private ConnectCommand()
+        private CommandConnect()
         {
             isConnected = false;
             mutex = new Mutex();
@@ -83,7 +83,8 @@ namespace FlightSimulator.Model
         private string[] ParseMessage(string message)
         {
             string[] commands;
-            return commands = message.Split('\n');
+            return commands = message.Split(new[] { Environment.NewLine },
+            StringSplitOptions.None);
         }
 
     }

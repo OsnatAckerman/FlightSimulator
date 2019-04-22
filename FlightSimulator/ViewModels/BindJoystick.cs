@@ -14,7 +14,7 @@ namespace FlightSimulator.ViewModels
             set
             {
                 string throttleLine = "set controls/engines/current-engine/throttle " + value + "\r\n";
-                ConnectCommand.Instance.Send(throttleLine);
+                CommandConnect.Instance.Send(throttleLine);
             }
         }
 
@@ -23,7 +23,7 @@ namespace FlightSimulator.ViewModels
             set
             {
                 string rudderLine = "set controls/flight/rudder " + value + "\r\n";
-                ConnectCommand.Instance.Send(rudderLine);
+                CommandConnect.Instance.Send(rudderLine);
             }
         }
 
@@ -32,7 +32,7 @@ namespace FlightSimulator.ViewModels
             set
             {
                 string ElevatorLine = "set /controls/flight/elevator " + value + "\r\n";
-                ConnectCommand.Instance.Send(ElevatorLine);
+                CommandConnect.Instance.Send(ElevatorLine);
             }
         }
 
@@ -41,7 +41,7 @@ namespace FlightSimulator.ViewModels
             set
             {
                 string AileronLine = "set /controls/flight/aileron " + value + "\r\n";
-                ConnectCommand.Instance.Send(AileronLine);
+                CommandConnect.Instance.Send(AileronLine);
             }
         }
 

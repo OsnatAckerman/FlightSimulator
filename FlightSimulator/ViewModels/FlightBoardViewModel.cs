@@ -23,20 +23,32 @@ namespace FlightSimulator.ViewModels
             get;
         }
 
-        #region SettingsCommand
         private ICommand _settingsCommand;
         public ICommand SettingsCommand
         {
             get
             {
-                return _settingsCommand ?? (_settingsCommand = new CommandHandler(() => OnClick()));
+                return _settingsCommand ?? (_settingsCommand = new CommandHandler(() => SettingsClick()));
             }
         }
-        private void OnClick()
+        private void SettingsClick()
         {
             var settingWin = new Settings();
             settingWin.Show();
         }
-        #endregion
+
+        private ICommand _connectCommand;
+        public ICommand ConnectCommand
+        {
+            get
+            {
+                return _connectCommand ?? (_connectCommand = new CommandHandler(() => ConnectClick()));
+            }
+        }
+        private void ConnectClick()
+        {
+            CommandConnect.Instance.ConnetAsClient();
+
+        }
     }
 }

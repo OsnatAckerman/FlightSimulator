@@ -12,7 +12,12 @@ namespace FlightSimulator.ViewModels
 {
     public class FlightBoardViewModel : BaseNotify
     {
+        private Server modelServer;
      
+        public FlightBoardViewModel(Server server)
+        {
+            this.modelServer = server;
+        }
         public double Lon
         {
             get;

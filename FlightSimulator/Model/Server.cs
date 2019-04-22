@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FlightSimulator.Model
 {
-    class Server
+    public class Server
     {
     }
 }

@@ -76,9 +76,9 @@ namespace FlightSimulator.Model
             _client = _listener.AcceptTcpClient();
             Console.WriteLine("Info channel: Client connected");
 
-
             Thread thread = new Thread(() => listen(_client, _listener));
             thread.Start();
+
         }
 
         // recieves the data from the plane and split the message to lon and lat
@@ -112,6 +112,16 @@ namespace FlightSimulator.Model
                 Lat = double.Parse(splitMs[1]);
             }
 
+        }
+
+        public void DisConnect()
+        {
+            shouldStop = true;
+        }
+
+        public bool isConnected()
+        {
+            return (_listener != null) ;
         }
 
     }

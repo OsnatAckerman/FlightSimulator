@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FlightSimulator"
         xmlns:Controls="clr-namespace:FlightSimulator.Views"
+        ResizeMode="NoResize"
         mc:Ignorable="d"
         Title="MainWindow" Height="550" Width="1000">
     <Grid>
@@ -15,5 +16,6 @@
         </Grid.ColumnDefinitions>
         <Controls:FlightBoard  Grid.Column="0"/>
         <Controls:ManualAauto Grid.Column="1"/>
+        
     </Grid>
 </Window>

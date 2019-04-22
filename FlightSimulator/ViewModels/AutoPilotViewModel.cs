@@ -11,12 +11,22 @@ namespace FlightSimulator.ViewModels
     class AutoPilotViewModel : BaseNotify
     {
         private String content = "";
+        private bool isSend = false;
 
         public String BackgroundColor
         {
             get {
-                if (content != "") { return "Pink"; }
-                else { return "White"; }
+                if (content != "") {
+                    if (isSend)
+                    {
+                        isSend = false;
+                        return "White";
+                    }
+                    return "Pink";
+                }
+                else {
+                    return "White";
+                }
             }
         }
 
@@ -60,6 +70,8 @@ namespace FlightSimulator.ViewModels
         private void OKClick()
         {
             CommandConnect.Instance.Send(content);
+            isSend = true;
+            NotifyPropertyChanged("BackgroundColor");
         }
 }
 }

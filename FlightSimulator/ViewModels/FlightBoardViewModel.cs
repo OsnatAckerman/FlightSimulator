@@ -3,6 +3,7 @@ using FlightSimulator.Model.Interface;
 using FlightSimulator.Views;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,15 +18,19 @@ namespace FlightSimulator.ViewModels
         public FlightBoardViewModel(Server server)
         {
             this.modelServer = server;
+            modelServer.PropertyChanged += delegate (object sender, PropertyChangedEventArgs e)
+            {
+                NotifyPropertyChanged(e.PropertyName);
+            };
         }
         public double Lon
         {
-            get;
+            get { return modelServer.Lon; }
         }
 
         public double Lat
         {
-            get;
+            get { return modelServer.Lat; }
         }
 
         private ICommand _settingsCommand;
@@ -52,6 +57,7 @@ namespace FlightSimulator.ViewModels
         }
         private void ConnectClick()
         {
+            Server.Instance.connectServer();
             CommandConnect.Instance.ConnetAsClient();
 
         }

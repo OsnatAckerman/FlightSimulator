@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FlightSimulator.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace FlightSimulator.Model
 {
-    public class Server
+    public class Server : BaseNotify
     {
         private static Server m_Instance = null;
         TcpClient _client;
@@ -44,11 +45,6 @@ namespace FlightSimulator.Model
                 NotifyPropertyChanged("Lat");
             }
             get { return lat; }
-        }
-
-        private void NotifyPropertyChanged(string v)
-        {
-            throw new NotImplementedException();
         }
 
         public static Server Instance

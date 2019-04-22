@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace FlightSimulator.Model
 {
-    public class Server  : BaseNotify
+    public class Server : BaseNotify
     {
         private static Server m_Instance = null;
         TcpClient _client;
@@ -47,7 +47,6 @@ namespace FlightSimulator.Model
             get { return lat; }
         }
 
-     
         public static Server Instance
         {
             get
@@ -75,7 +74,7 @@ namespace FlightSimulator.Model
             _listener = new TcpListener(ep);
             _listener.Start();
             _client = _listener.AcceptTcpClient();
-            Console.WriteLine("server channel: Client connected");
+            Console.WriteLine("Info channel: Client connected");
 
 
             Thread thread = new Thread(() => listen(_client, _listener));

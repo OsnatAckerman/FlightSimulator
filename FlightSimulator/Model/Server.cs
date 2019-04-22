@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace FlightSimulator.Model
 {
-    class Server : BaseNotify
+     public class Server : BaseNotify
     {
         private static Server m_Instance = null;
         TcpClient _client;

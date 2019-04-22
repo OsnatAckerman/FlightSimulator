@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FlightSimulator.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace FlightSimulator.Model
 {
-    public class Server
+    public class Server  : BaseNotify
     {
         private static Server m_Instance = null;
         TcpClient _client;
@@ -46,11 +47,7 @@ namespace FlightSimulator.Model
             get { return lat; }
         }
 
-        private void NotifyPropertyChanged(string v)
-        {
-            throw new NotImplementedException();
-        }
-
+     
         public static Server Instance
         {
             get
@@ -78,7 +75,7 @@ namespace FlightSimulator.Model
             _listener = new TcpListener(ep);
             _listener.Start();
             _client = _listener.AcceptTcpClient();
-            Console.WriteLine("Info channel: Client connected");
+            Console.WriteLine("server channel: Client connected");
 
 
             Thread thread = new Thread(() => listen(_client, _listener));

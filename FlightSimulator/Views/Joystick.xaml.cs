@@ -166,7 +166,7 @@ namespace FlightSimulator.Views
         {
             Knob.ReleaseMouseCapture();
             centerKnob.Begin();
-        }
+        } 
 
         private void centerKnob_Completed(object sender, EventArgs e)
         {

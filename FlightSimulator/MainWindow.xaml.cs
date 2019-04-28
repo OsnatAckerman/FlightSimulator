@@ -22,6 +22,7 @@ namespace FlightSimulator
     {
         public MainWindow()
         {
+            //when the window closed disconnect the server and client channels.
             Closed += MainWindowClosed;
             InitializeComponent();
         }

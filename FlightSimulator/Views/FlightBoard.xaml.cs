@@ -42,26 +42,29 @@ namespace FlightSimulator.Views
             planeLocations.SetXYMapping(p => p);
 
             plotter.AddLineGraph(planeLocations, 2, "Route");
+            // add to the VM event when property changes, do Vm_PropertyChanged
             flightBoardVM.PropertyChanged += Vm_PropertyChanged;
 
         }
 
+        /*the function that happens when lon and lat are recieved. add the recieved
+        data to the points list to plot on the chart.*/
         private void Vm_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if(isFirst)
+            // the first data is not used.
+            if (isFirst)
             {
                 isFirst = false;
             }
-            else if(e.PropertyName.Equals("Lat") || e.PropertyName.Equals("Lon"))
+            else if (e.PropertyName.Equals("Lat") || e.PropertyName.Equals("Lon"))
             {
-                Point p1 = new Point(flightBoardVM.Lat,flightBoardVM.Lon);
+                //create new point according to the lat and lon data.
+                Point p1 = new Point(flightBoardVM.Lat, flightBoardVM.Lon);
                 planeLocations.AppendAsync(Dispatcher, p1);
                 isFirst = true;
-
             }
         }
 
     }
-
 }
 

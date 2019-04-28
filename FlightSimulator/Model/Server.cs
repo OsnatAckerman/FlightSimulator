@@ -10,43 +10,15 @@ using System.Threading.Tasks;
 
 namespace FlightSimulator.Model
 {
+    /* the Info channel from the simulator */
     public class Server : BaseNotify
     {
-        private static Server m_Instance = null;
         TcpClient _client;
         TcpListener _listener;
         double lon, lat;
 
-
-
-        public bool shouldStop
-        {
-            set;
-            get;
-        }
-
-
-        public double Lon
-        {
-            set
-            {
-                lon = value;
-                NotifyPropertyChanged("Lon");
-
-            }
-            get { return lon; }
-        }
-
-        public double Lat
-        {
-            set
-            {
-                lat = value;
-                NotifyPropertyChanged("Lat");
-            }
-            get { return lat; }
-        }
-
+        //singelton
+        private static Server m_Instance = null;
         public static Server Instance
         {
             get
@@ -59,23 +31,55 @@ namespace FlightSimulator.Model
             }
         }
 
+        //private constructor will be called from singelton
         private Server()
         {
 
-            shouldStop = false;
+            ShouldStop = false;
         }
 
-        // make a server socket for the simulator to send data .
+        public bool ShouldStop
+        {
+            set;
+            get;
+        }
+
+
+        public double Lon
+        {
+            set
+            {
+                lon = value;
+                //when recieved new data, notify the view by viewModel
+                NotifyPropertyChanged("Lon");
+
+            }
+            get { return lon; }
+        }
+
+        public double Lat
+        {
+            set
+            {
+                lat = value;
+                //when recieved new data, notify the view by viewModel
+                NotifyPropertyChanged("Lat");
+            }
+            get { return lat; }
+        }
+        
+
+        /*make a connection to the simulator as a server to recieve data*/
         public void connectServer()
         {
-
+            //extract IP and port of the simulator as saved in ApplicationSettingsModel
             IPEndPoint ep = new IPEndPoint(IPAddress.Parse(ApplicationSettingsModel.Instance.FlightServerIP),
-        ApplicationSettingsModel.Instance.FlightInfoPort);
+                ApplicationSettingsModel.Instance.FlightInfoPort);
+
             _listener = new TcpListener(ep);
             _listener.Start();
             _client = _listener.AcceptTcpClient();
-            Console.WriteLine("Info channel: Client connected");
-
+            //after connection receive data in differnt thread
             Thread thread = new Thread(() => listen(_client, _listener));
             thread.Start();
 
@@ -87,7 +91,7 @@ namespace FlightSimulator.Model
             Byte[] bytes;
             NetworkStream ns = _client.GetStream();
             //recieve message from the simulator until shouldStop.
-            while (!shouldStop)
+            while (!ShouldStop)
             {
                 if (_client.ReceiveBufferSize > 0)
                 {
@@ -102,23 +106,24 @@ namespace FlightSimulator.Model
             _listener.Stop();
         }
 
-        // solit the server to lon and lat
+        // split the server message and parse to lon and lat
         public void splitMessage(string msg)
         {
             string[] splitMs = msg.Split(',');
+            //if the message recieved new data
             if (msg.Contains(","))
             {
                 Lon = double.Parse(splitMs[0]);
                 Lat = double.Parse(splitMs[1]);
             }
-
         }
 
         public void DisConnect()
         {
-            shouldStop = true;
+            ShouldStop = true;
         }
 
+        /* returns true if the server still listening, false otherwise */
         public bool isConnected()
         {
             return (_listener != null) ;

@@ -9,15 +9,19 @@ namespace FlightSimulator.ViewModels
 {
     class BindJoystick
     {
+        /*the function responsible about the change of the joystick and update the flight simulator,
+         the value of throttle*/
         public float ThrottleCommand
         {
+            
             set
             {
                 string throttleLine = "set controls/engines/current-engine/throttle " + value + "\r\n";
                 CommandConnect.Instance.Send(throttleLine);
             }
         }
-
+        /*the function responsible about the change of the joystick and update the flight simulator,
+         the value of rudder*/
         public float RudderCommand
         {
             set
@@ -26,7 +30,8 @@ namespace FlightSimulator.ViewModels
                 CommandConnect.Instance.Send(rudderLine);
             }
         }
-
+        /*the function responsible about the change of the joystick and update the flight simulator,
+         the value of Elevator*/
         public float ElevatorCommand
         {
             set
@@ -35,7 +40,8 @@ namespace FlightSimulator.ViewModels
                 CommandConnect.Instance.Send(ElevatorLine);
             }
         }
-
+        /*the function responsible about the change of the joystick and update the flight simulator,
+          the value of ailorn */
         public float AileronCommand
         {
             set

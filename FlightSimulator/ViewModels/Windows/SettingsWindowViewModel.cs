@@ -62,7 +62,7 @@ namespace FlightSimulator.ViewModels.Windows
         {
             model.ReloadSettings();
         }
-
+        /*this function responsible about the buttom  in autoPilot*/
         #region Commands
         #region ClickCommand
         private ICommand _clickCommand;
@@ -70,9 +70,11 @@ namespace FlightSimulator.ViewModels.Windows
         {
             get
             {
+                //we send to commandHandler objectFunction about the use of the buttom .
                 return _clickCommand ?? (_clickCommand = new CommandHandler(() => OnClick()));
             }
         }
+        /*the function save the  setting and open the main windows.*/
         private void OnClick()
         {
             model.SaveSettings();
@@ -81,16 +83,18 @@ namespace FlightSimulator.ViewModels.Windows
             window.Close();
         }
         #endregion
-
+        /*this function responsible about the buttom cancel in autoPilot*/
         #region CancelCommand
         private ICommand _cancelCommand;
         public ICommand CancelCommand
         {
             get
             {
+                //we send to commandHandler objectFunction about the use of the buttom .
                 return _cancelCommand ?? (_cancelCommand = new CommandHandler(() => OnCancel()));
             }
         }
+        /*the function save the previous setting and open the main windows.*/
         private void OnCancel()
         {
             model.ReloadSettings();
